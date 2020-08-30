@@ -9,7 +9,7 @@ from datetime import date
 port = 465 
 smtp_server = "smtp.gmail.com"
 sender_email = "healthdeclarations@gmail.com"
-password = "health1234"
+password = "*****"
 body = ""
 
 def send_email(name, receiver_email, bcc_email, file_name): 
