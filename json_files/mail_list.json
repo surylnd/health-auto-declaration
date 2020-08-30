@@ -1,0 +1,11 @@
+{
+  "names":
+  [
+    {
+      "name" : "NAME",
+      "email" : "SEND_TO",
+      "bcc_email" : "BCC_TO",
+      "file_name" : "FILE_NAME"
+    }
+  ]
+}
