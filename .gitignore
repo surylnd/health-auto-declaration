@@ -1,0 +1,6 @@
+health_forms/*
+*.pyc
+*.log
+mail_list.json
+*test.json*
+json_files/mail_list.json

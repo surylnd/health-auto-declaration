@@ -2,59 +2,58 @@ import schedule
 import time
 import json
 import os
+import logging
 
 from send_email import send_email
 from edit_pdf import create_overlay, merge_pdfs
 from collections import namedtuple
 from datetime import date
+from child import Child
+from bidi.algorithm import get_display
 
-class Student(object):
-    def __init__(self, name, email, bcc_email, file_name, *args, **kwargs):
-        self.name = name
-        self.email = email
-        self.bcc_email = bcc_email
-        self.file_name = file_name
+def init():
+    os.chdir(os.path.join(os.path.dirname(__file__), '..'))
 
-def get_names_from_json():
-    stds=[]
+    logging.basicConfig(level=logging.INFO,filename=date.today().strftime("%d%m%Y") + 'send_mails.log', filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
+    logging.info("- - - Job Started - - -")
+
+def get_children_from_json():
+    children=[]
     with open('json_files/mail_list.json') as f:
         data = json.load(f)
-        for st in data["names"]:
-            stds.append(Student(**st))
+        for child_json in data["names"]:
+            children.append(Child(**child_json))
     
-    return stds
+    return children
 
 def job():
     if date.today().weekday() == 5 : return
-
-    create_overlay()
-    all_names = get_names_from_json()
-    overlay_file = 'date_overlay.pdf'
     
-    for nm in all_names:
-        output_file_name= "health_forms/" + nm.file_name + "_date.pdf"
-        merge_pdfs(nm.file_name + ".pdf", 
-                overlay_file, 
-                output_file_name)
-
-        send_email(nm.name, nm.email,nm.bcc_email, output_file_name)
-        
-        print ("Mail sent for: " + nm.name + " To: " +nm.email)
-        
-        if os.path.exists(output_file_name):
-            os.remove(output_file_name)
+    all_children = get_children_from_json()
     
-    if os.path.exists(overlay_file):
-            os.remove(overlay_file)
+    
+    for child in all_children:
+        logging.info(f'Found {get_display(child.child_name)} info')
+        if child.send_email:
+            output_file_name= "health_forms/" + child.child_id + "_date.pdf"
+            merge_pdfs(child, output_file_name)
+
+            send_email(child, output_file_name)
+            
+            logging.info(f'Mail sent for: {get_display(child.child_name)} To: {child.email}')
+            
+            if os.path.exists(output_file_name):
+                os.remove(output_file_name)   
+        else:
+            logging.info(f'Mail NOT sent for: {get_display(child.child_name)}')
     return
 
 
 if __name__ == '__main__':
-    os.chdir(os.path.join(os.path.dirname(__file__), '..'))
-    print ("- - - Job Started - - -")
-    schedule.every().day.at("08:00").do(job)
-    
+    init()
+    job()
+    #schedule.every().day.at("08:00").do(job)
 
-    while True:
+    while False:
         schedule.run_pending()
         time.sleep(60) # wait one minute

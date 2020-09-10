@@ -9,15 +9,16 @@ from datetime import date
 port = 465 
 smtp_server = "smtp.gmail.com"
 sender_email = "healthdeclarations@gmail.com"
-password = "*****"
+password = "health1234"
 body = ""
+today_str = date.today().strftime("%d/%m/%Y")
 
-def send_email(name, receiver_email, bcc_email, file_name): 
+def send_email(child, file_name): 
     message = MIMEMultipart()
     message["From"] = sender_email
-    message["To"] = receiver_email
-    message["Subject"] = "הצהרת בריאות" + " " + name + "-" + date.today().strftime("%d/%m/%Y")
-    message["Bcc"] = bcc_email
+    message["To"] = child.email
+    message["Subject"] = "הצהרת בריאות " + " " + child.child_name + "-" + today_str
+    message["cc"] = child.cc_email
 
     message.attach(MIMEText(body, "plain"))
 
@@ -29,7 +30,7 @@ def send_email(name, receiver_email, bcc_email, file_name):
 
     part.add_header(
         "Content-Disposition",
-        f"attachment; filename= {file_name}",
+        f"attachment; filename= {child.child_id}_{today_str}.pdf",
     )
 
     message.attach(part)
@@ -38,4 +39,4 @@ def send_email(name, receiver_email, bcc_email, file_name):
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
         server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, text)
+        server.sendmail(sender_email, [child.email,child.cc_email], text)
