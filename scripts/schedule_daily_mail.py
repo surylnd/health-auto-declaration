@@ -31,7 +31,6 @@ def job():
     
     all_children = get_children_from_json()
     
-    
     for child in all_children:
         logging.info(f'Found {get_display(child.child_name)} info')
         if child.send_email:
@@ -55,4 +54,4 @@ if __name__ == '__main__':
 
     while True:
         schedule.run_pending()
-        time.sleep(60) # wait one minute
+        time.sleep(60)

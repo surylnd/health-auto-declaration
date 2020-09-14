@@ -12,3 +12,5 @@ ps -eaf  | grep schedule
 1. Advertize link to survey
 2. Export data to csv
 3. Generate json file from csv
+4. Log should not override previous log from same date
+5. Add config file 
