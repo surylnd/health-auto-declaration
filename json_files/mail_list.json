@@ -3,48 +3,12 @@
   [
     {
       "send_email": true,
-      "child_name" : "איציק לנדאו",
-      "child_id": "221142722",
-      "parent_name": "שירי לנדאו",
-      "parent_id":"305362121",
-      "email" : "ttbraban@gmail.com",
-      "cc_email" : "surylnd@gmail.com"
-    },
-    {
-      "send_email": true,
-      "child_name" : "אלי ליפשיץ",
-      "child_id": "219984028",
-      "parent_name": "יגאל ליפשיץ",
-      "parent_id":"038790762",
-      "email" : "ttbraban@gmail.com",
-      "cc_email" : "yiggal@gmail.com"
-    },
-    {
-      "send_email": true,
-      "child_name" : "ישי קרלינסקי",
-      "child_id": "219838646",
-      "parent_name": "אביגיל היילברון",
-      "parent_id":"200754950",
-      "email" : "ttbraban@gmail.com",
-      "cc_email" : "avigayil20@gmail.com"
-    },
-    {
-      "send_email": true,
-      "child_name" : "איתי הקר",
-      "child_id": "221251242",
-      "parent_name": "הודיה הקר",
-      "parent_id":"201045986",
-      "email" : "ttbraban@gmail.com",
-      "cc_email" : "doda2310@gmail.com"
-    },
-    {
-      "send_email": true,
-      "child_name" : "אסף הקר",
-      "child_id": "221251259",
-      "parent_name": "הודיה הקר",
-      "parent_id":"201045986",
-      "email" : "ttbraban@gmail.com",
-      "cc_email" : "doda2310@gmail.com"
+      "child_name" : "NAME",
+      "child_id": "111111111",
+      "parent_name": "NAME",
+      "parent_id":"222222222",
+      "email" : "SCHOOL@gmail.com",
+      "cc_email" : "PARENT@gmail.com"
     }        
   ]
 }
