@@ -27,6 +27,7 @@ def get_children_from_json():
     return children
 
 def job():
+    init()
     if date.today().weekday() == 5 : return
     
     all_children = get_children_from_json()
@@ -49,8 +50,7 @@ def job():
 
 
 if __name__ == '__main__':
-    init()
-    schedule.every().day.at("07:30").do(job)
+    schedule.every().day.at("08:00").do(job)
 
     while True:
         schedule.run_pending()

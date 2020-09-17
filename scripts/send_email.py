@@ -11,9 +11,9 @@ smtp_server = "smtp.gmail.com"
 sender_email = "healthdeclarations@gmail.com"
 password = "health1234"
 body = ""
-today_str = date.today().strftime("%d/%m/%Y")
 
 def send_email(child, file_name): 
+    today_str = date.today().strftime("%d/%m/%Y")
     message = MIMEMultipart()
     message["From"] = sender_email
     message["To"] = child.email

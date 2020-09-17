@@ -10,10 +10,11 @@ import os
 
 
 pdfmetrics.registerFont(TTFont('Hebrew', 'ArialHB.ttf'))
-today = date.today()
-today_str = today.strftime("%d/%m/%Y")
 
-def create_overlay(child):    
+
+def create_overlay(child):  
+    today = date.today()
+    today_str = today.strftime("%d/%m/%Y")  
     health_canvas = canvas.Canvas(child.child_id + "_overlay.pdf")
     health_canvas.setFont("Hebrew", 14)
     
